@@ -1,0 +1,5 @@
+.ssh/
+.venv/
+
+brain-tumor-dataset-YOLO/
+brain-tumor-dataset-YOLO.zip
