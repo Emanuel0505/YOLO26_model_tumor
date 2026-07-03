@@ -1,4 +1,4 @@
-from GLOBAL import *
+from setup.GLOBAL import *
 from sklearn.model_selection import train_test_split
 from ultralytics import YOLO
 import matplotlib.pyplot as plt
