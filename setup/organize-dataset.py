@@ -31,6 +31,36 @@ def polygon_mask(path):
   Converter a imagem da mascara em coordenadas do YOLO
   """
   mask = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+  if mask is None:
+    return []
+
+  H, W = mask.shape[:2]
+
+  _, thresh = cv2.threshold(mask, 127, 255, cv2.THRESH_BINARY)
+  contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+  polygons = []
+  img_area = H * W
+
+  for contour in contours:
+    area = cv2.contourArea(contour)
+
+    if area < 50:
+      continue
+
+    if area > img_area * 0.9:
+      continue
+
+    flat_contour = contour.reshape(-1, 2)
+    polygon = []
+
+    for x, y in flat_contour:
+      polygon.extend([x / W, y / H])
+
+    if len(polygon) >= 6:
+      polygons.append(polygon)
+
+  return polygons
 
   H, W = mask.shape
   _, thresh = cv2.threshold(mask, 127, 255, cv2.THRESH_BINARY)
