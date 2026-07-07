@@ -13,7 +13,7 @@ model.train(
     device=0,
 
     #diretorio
-    name= 'Model_tumor_yolo',
+    name= NAME_MODEL,
     project=PATH_MODEL_TRAIN,
     exist_ok=False,
 
