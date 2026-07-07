@@ -11,13 +11,19 @@ model.train(
     epochs=200,
     plots=True,  
     device=0,
+
+    #diretorio
     name= 'Model_tumor_yolo',
     project=PATH_MODEL_TRAIN,
+    exist_ok=False,
 
     #config para melhor treino
     optimizer='AdamW',
+    batch=-1,
     lr0=0.001,
     freeze=10,
     degrees=15,
-
+    mask_ratio=1,
+    cls_pw=1,
+    patience=50,
 )
