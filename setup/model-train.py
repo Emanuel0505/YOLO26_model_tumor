@@ -4,11 +4,11 @@ from ultralytics import YOLO
 import matplotlib.pyplot as plt
 import os
 
-model = YOLO("yolo26n-seg.pt")
+model = YOLO("yolo26s-seg.pt")
 
 model.train(
     data=PATH_YAML,
-    epochs=100,
+    epochs=200,
     plots=True,  
     device=0,
     name= 'Model_tumor_yolo',
