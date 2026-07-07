@@ -19,7 +19,7 @@ model.train(
 
     #config para melhor treino
     optimizer='AdamW',
-    batch=-1,
+    batch=32,
     lr0=0.001,
     freeze=10,
     degrees=15,
