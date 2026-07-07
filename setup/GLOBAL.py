@@ -3,7 +3,7 @@ import kagglehub
 
 DATASET_ORINGIN = kagglehub.dataset_download("indk214/brain-tumor-dataset-segmentation-and-classification")
 
-YOLO_DATASET = '../brain-tumor-dataset-YOLO'
+YOLO_DATASET = 'brain-tumor-dataset-YOLO'
 
 CLASS = {'glioma': 0,  'meningioma': 1, 'pituitary': 2}
 
