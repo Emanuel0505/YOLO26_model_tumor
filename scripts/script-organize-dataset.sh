@@ -7,4 +7,4 @@
 #SBATCH --output=slurm-%j.out
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
-python  ../setup/organize-dataset.py
+python  setup/organize-dataset.py
