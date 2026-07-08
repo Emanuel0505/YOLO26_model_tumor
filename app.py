@@ -2,6 +2,8 @@ from ultralytics import YOLO
 from PIL import Image
 import streamlit as st
 import numpy as np
+import requests
+import os
 
 st.set_page_config(
     page_title="Analisador de Tumores Cerebrais",
@@ -18,9 +20,26 @@ st.markdown("""
     """)
 st.divider()
 
+
+MODEL_URL = "https://github.com/Emanuel0505/YOLO26_model_tumor/releases/download/Arquivo-de-treinamento/best.pt"
+MODEL_PATH = os.path.join("models", "best.pt")
+
+def download_model():
+    os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
+
+    if not os.path.exists(MODEL_PATH):
+        with requests.get(MODEL_URL, stream=True, timeout=60) as r:
+            r.raise_for_status()
+            with open(MODEL_PATH, "wb") as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+
+    return MODEL_PATH
+
 @st.cache_resource
 def carregar_modelo():
-    return YOLO('model_tumor.py')
+    return YOLO(download_model())
 
 try: 
     model = carregar_modelo()
@@ -35,6 +54,7 @@ file_config = st.file_uploader(
 
 if file_config is not None:
     imagem_original = Image.open(file_config)
+    imagem_original = np.array(imagem_original)
     
     st.write("")
     col_btn1, col_btn2, col_btn3 = st.columns([1, 2, 1])
